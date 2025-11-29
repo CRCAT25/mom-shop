@@ -1,5 +1,5 @@
-import { Star } from 'lucide-react'
-import Product1Image from '../assets/product1.png'
+import { Star } from 'lucide-react';
+import Product1Image from '../assets/product1.jpg';
 import { useState } from 'react';
 
 interface ProductSize {
@@ -17,13 +17,13 @@ const ProductCard = () => {
     ];
 
     return (
-        <div className="product-card-container max-w-3xl mx-auto h-auto bg-white border border-[#EEEEEE] rounded-3xl shadow-lg p-5">
-            <div className="flex gap-4">
+        <div className="product-card-container max-w-3xl mx-auto h-auto bg-white border border-[#EEEEEE] rounded-xl shadow-lg p-5">
+            <div className="flex gap-5">
                 {/* IMAGE */}
-                <div className="rounded-2xl min-w-[200px]">
+                <div className="w-[200px] h-[200px]">
                     <img
                         src={Product1Image}
-                        className="w-[200px] h-[200px] object-cover"
+                        className="w-full h-full object-fill rounded-lg"
                     />
                 </div>
                 {/* PRODUCT DETAILS */}
@@ -57,7 +57,7 @@ const ProductCard = () => {
                                 <button
                                     key={size.id}
                                     onClick={() => setSelectedSize(size.id)}
-                                    className={`px-6 py-2 cursor-pointer text-[12px] rounded-lg font-medium transition-colors ${selectedSize === size.id
+                                    className={`px-5 py-2 uppercase cursor-pointer text-[12px] rounded-lg font-medium transition-colors ${selectedSize === size.id
                                         ? 'bg-gray-800 text-white'
                                         : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                                         }`}
