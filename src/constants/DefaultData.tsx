@@ -1,0 +1,1 @@
+export const defaultImage: string = 'https://i.ibb.co/XZZYxypx/default.png';

@@ -3,17 +3,25 @@ import { useEffect, useState } from 'react';
 import { Badge, Button, InputNumber, Rate } from 'antd';
 import './productCard.css';
 import SizeSelector from '../SizeSelector';
-import type { ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
+import type { ProductAddToCartDTO, ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
 import { formatCurrency } from '../../../../utils/formatCurrency';
-import ProductImageSlider from '../ProductImageSlider';
+import ProductImageSlider from '../ProductImageSlider/ProductImageSlider';
+import { defaultImage } from '../../../../constants/DefaultData';
 
-const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
+interface ProductCardProps {
+    product: ProductDTO;
+    onAddToCart?: (item: ProductAddToCartDTO) => void;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     //#region STATES
     const [selectedSize, setSelectedSize] = useState<ProductSizeDTO>({
+        id: 0,
         name: '',
         quantity: 0,
         price: 0
     });
+    const [quantity, setQuantity] = useState(1);
     //#endregion
 
     //#region HANDLE FUNCTIONS
@@ -28,7 +36,20 @@ const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
         setSelectedSize(size);
     };
 
+    const handleAddToCart = () => {
+        if (!onAddToCart) return;
 
+        const item: ProductAddToCartDTO = {
+            id: product.id,
+            sizeId: selectedSize.id,
+            quantity,
+            price: selectedSize.price,
+            totalPrice: quantity * selectedSize.price,
+            imageUrl: product.images.length > 0 ? product.images[0] : defaultImage
+        };
+
+        onAddToCart(item);
+    };
     //#endregion
 
     //#region TAG PROPS
@@ -125,8 +146,20 @@ const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
                                     </div>
 
                                     <div className='flex justify-between gap-2'>
-                                        <InputNumber {...quantityInputProps} variant="filled" placeholder="0" />
-                                        <Button {...buttonAddToCartProps} type="primary" shape="round" icon={<ShoppingCartIcon />} size='small'>
+                                        <InputNumber
+                                            {...quantityInputProps}
+                                            value={quantity}
+                                            onChange={(value) => setQuantity(value ?? 1)}
+                                            variant="filled"
+                                        />
+                                        <Button
+                                            {...buttonAddToCartProps}
+                                            type="primary"
+                                            shape="round"
+                                            icon={<ShoppingCartIcon />}
+                                            size="small"
+                                            onClick={handleAddToCart}
+                                        >
                                             Thêm vào giỏ hàng
                                         </Button>
                                     </div>
