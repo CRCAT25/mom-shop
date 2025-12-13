@@ -1,10 +1,10 @@
 import { ShoppingCartIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Badge, Button, InputNumber, Rate } from 'antd';
-import '../styles/productCard.css';
-import SizeSelector from './SizeSelector';
-import type { ProductDTO, ProductSizeDTO } from '../types/ProductDTO';
-import { formatCurrency } from '../utils/formatCurrency';
+import './productCard.css';
+import SizeSelector from '../SizeSelector';
+import type { ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
+import { formatCurrency } from '../../../../utils/formatCurrency';
 
 const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
     const [selectedSize, setSelectedSize] = useState<ProductSizeDTO>({
