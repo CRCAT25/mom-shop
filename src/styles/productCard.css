@@ -1,0 +1,9 @@
+/* Quantity Input */
+.quantity-input .ant-input-number-action {
+    border: none !important;
+}
+
+/* Add to Cart Button */
+.add-to-cart-button .ant-btn-icon {
+    display: flex;
+}

@@ -1,74 +1,135 @@
-import { Star } from 'lucide-react';
-import Product1Image from '../assets/product1.jpg';
-import { useState } from 'react';
+import { ShoppingCartIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Badge, Button, InputNumber, Rate } from 'antd';
+import '../styles/productCard.css';
+import SizeSelector from './SizeSelector';
+import type { ProductDTO, ProductSizeDTO } from '../types/ProductDTO';
+import { formatCurrency } from '../utils/formatCurrency';
 
-interface ProductSize {
-    id: string;
-    label: string;
-}
+const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
+    const [selectedSize, setSelectedSize] = useState<ProductSizeDTO>({
+        name: '',
+        quantity: 0,
+        price: 0
+    });
 
-const ProductCard = () => {
-    const [selectedSize, setSelectedSize] = useState<string>('small');
+    useEffect(() => {
+        const availableSize = product.sizes.find(size => size.quantity > 0);
+        if (availableSize) {
+            setSelectedSize(availableSize);
+        }
+    }, [product.sizes]);
 
-    const mockSizes: ProductSize[] = [
-        { id: 'small', label: 'Nhỏ' },
-        { id: 'medium', label: 'Trung' },
-        { id: 'large', label: 'Lớn' },
-    ];
+    const handleSizeChange = (size: ProductSizeDTO) => {
+        setSelectedSize(size);
+    };
+
+    const quantityInputProps = {
+        mode: 'spinner' as const,
+        min: 1,
+        max: selectedSize.quantity,
+        defaultValue: 1,
+        style: {
+            width: 120,
+            height: 40,
+            backgroundColor: '#FFFFFF',
+            borderRadius: '100px',
+            border: '1px solid #000',
+            fontWeight: 600
+        },
+        className: 'quantity-input',
+    };
+
+    const buttonAddToCartProps = {
+        style: {
+            width: `calc(100% - ${quantityInputProps.style.width}px)`,
+            height: 40,
+            backgroundColor: '#FFB432',
+            fontWeight: 600
+        },
+        className: 'add-to-cart-button',
+    };
+
+    const productStatusProps = {
+        style: {
+            height: 30,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '0 14px'
+        },
+        text: product.status == 1 ? "Còn hàng" : "Hết hàng",
+        color: product.status == 1 ? '#008001' : '#D00000'
+    };
 
     return (
-        <div className="product-card-container max-w-3xl mx-auto h-auto bg-white border border-[#EEEEEE] rounded-xl shadow-lg p-5">
-            <div className="flex gap-5">
-                {/* IMAGE */}
-                <div className="w-[200px] h-[200px]">
-                    <img
-                        src={Product1Image}
-                        className="w-full h-full object-fill rounded-lg"
-                    />
-                </div>
-                {/* PRODUCT DETAILS */}
-                <div className='flex flex-col'>
-                    {/* Product name */}
-                    <div className='text-[22px]'>BÁNH CHƯNG MẶN</div>
-
-                    {/* Rating */}
-                    <div className="flex gap-3 mt-1">
-                        <div className="flex gap-1">
-                            {[...Array(5)].map((_, i) => (
-                                <Star
-                                    key={i}
-                                    size={20}
-                                    className="fill-yellow-400 text-yellow-400"
-                                />
-                            ))}
+        <div className="product-card-container max-w-3xl mx-auto h-auto bg-white border border-[#EEEEEE] rounded-xl shadow-lg">
+            <Badge.Ribbon {...productStatusProps}>
+                <div className='p-5'>
+                    <div className="flex gap-5 w-full">
+                        {/* IMAGE */}
+                        <div className="w-[200px] h-[200px]">
+                            <img
+                                src={product.images[0]}
+                                className="w-full h-full object-cover rounded-lg"
+                            />
                         </div>
-                        <span className="text-[14px] text-gray-700">
-                            5.0 (999+ đánh giá)
-                        </span>
-                    </div>
+                        {/* PRODUCT DETAILS */}
+                        <div className='flex flex-col justify-between gap-1' style={{ width: 'calc(100% - 200px)' }}>
+                            {/* Block 1 */}
+                            <div>
+                                {/* Product name */}
+                                <div className='flex justify-between gap-2 items-center'>
+                                    <div className='text-[24px] font-bold uppercase'>{product.name}</div>
+                                </div>
 
-                    {/* Size Selection */}
-                    <div className="mt-4">
-                        <label className="block text-[#4D4D4D] font-medium text-[14px]">
-                            Chọn size
-                        </label>
-                        <div className="flex gap-3 mt-1">
-                            {mockSizes.map(size => (
-                                <button
-                                    key={size.id}
-                                    onClick={() => setSelectedSize(size.id)}
-                                    className={`px-5 py-2 uppercase cursor-pointer text-[12px] rounded-lg font-medium transition-colors ${selectedSize === size.id
-                                        ? 'bg-gray-800 text-white'
-                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                        }`}
-                                >
-                                    {size.label}
-                                </button>
-                            ))}
+                                {/* Rating */}
+                                <div className="flex gap-3">
+                                    <Rate allowHalf defaultValue={product.rating} disabled />
+                                    <span className="text-[14px]">
+                                        {product.rating} ({product.totalReviews} đánh giá)
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Block 2 */}
+                            <div className='flex justify-between w-full'>
+                                <div className='flex flex-col justify-between w-full gap-0.5'>
+                                    {/* Size Selection */}
+                                    <label className="block text-[#4D4D4D] font-medium text-[12px]">
+                                        Chọn size
+                                    </label>
+
+                                    <div className="flex gap-3 justify-between items-end">
+                                        <SizeSelector
+                                            selectedSize={selectedSize}
+                                            sizes={product.sizes}
+                                            setSelectedSize={handleSizeChange}
+                                        />
+
+                                        <span>Còn <span className='font-bold text-[#008001]'>{selectedSize.quantity}</span> sản phẩm</span>
+                                    </div>
+
+                                    {/* Quantity Selection */}
+                                    <div className='flex justify-between gap-2 items-end'>
+                                        <span className="text-[#4D4D4D] font-medium text-[12px]">
+                                            Số lượng
+                                        </span>
+                                        <span className='font-bold text-[22px]'>{formatCurrency(selectedSize.price)}</span>
+                                    </div>
+
+                                    <div className='flex justify-between gap-2'>
+                                        <InputNumber {...quantityInputProps} variant="filled" placeholder="0" />
+                                        <Button {...buttonAddToCartProps} type="primary" shape="round" icon={<ShoppingCartIcon />} size='small'>
+                                            Thêm vào giỏ hàng
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </Badge.Ribbon>
         </div>
     )
 }
