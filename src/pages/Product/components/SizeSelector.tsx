@@ -1,5 +1,5 @@
 import React from 'react';
-import type { ProductSizeDTO } from '../types/ProductDTO';
+import type { ProductSizeDTO } from '../../../types/ProductDTO';
 
 interface SizeSelectorProps {
     selectedSize: ProductSizeDTO | undefined;

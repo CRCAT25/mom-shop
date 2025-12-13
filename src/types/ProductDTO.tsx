@@ -23,6 +23,8 @@ export const productTest: ProductDTO = {
     totalReviews: 999,
     images: [
         'https://i.ibb.co/tMtq7YcQ/product1.jpg',
+        'https://i.ibb.co/ccvmk2gW/product2.jpg',
+        'https://i.ibb.co/wrZqB8md/product4.jpg'
     ],
     sizes: [
         { name: 'Nhỏ', quantity: 0, price: 50000 },

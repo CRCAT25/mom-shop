@@ -5,14 +5,18 @@ import './productCard.css';
 import SizeSelector from '../SizeSelector';
 import type { ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
 import { formatCurrency } from '../../../../utils/formatCurrency';
+import ProductImageSlider from '../ProductImageSlider';
 
 const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
+    //#region STATES
     const [selectedSize, setSelectedSize] = useState<ProductSizeDTO>({
         name: '',
         quantity: 0,
         price: 0
     });
+    //#endregion
 
+    //#region HANDLE FUNCTIONS
     useEffect(() => {
         const availableSize = product.sizes.find(size => size.quantity > 0);
         if (availableSize) {
@@ -24,6 +28,10 @@ const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
         setSelectedSize(size);
     };
 
+
+    //#endregion
+
+    //#region TAG PROPS
     const quantityInputProps = {
         mode: 'spinner' as const,
         min: 1,
@@ -61,6 +69,7 @@ const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
         text: product.status == 1 ? "Còn hàng" : "Hết hàng",
         color: product.status == 1 ? '#008001' : '#D00000'
     };
+    //#endregion
 
     return (
         <div className="product-card-container max-w-3xl mx-auto h-auto bg-white border border-[#EEEEEE] rounded-xl shadow-lg">
@@ -68,12 +77,9 @@ const ProductCard: React.FC<{ product: ProductDTO }> = ({ product }) => {
                 <div className='p-5'>
                     <div className="flex gap-5 w-full">
                         {/* IMAGE */}
-                        <div className="w-[200px] h-[200px]">
-                            <img
-                                src={product.images[0]}
-                                className="w-full h-full object-cover rounded-lg"
-                            />
-                        </div>
+                        <ProductImageSlider
+                            images={product.images}
+                        />
                         {/* PRODUCT DETAILS */}
                         <div className='flex flex-col justify-between gap-1' style={{ width: 'calc(100% - 200px)' }}>
                             {/* Block 1 */}
