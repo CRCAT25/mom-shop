@@ -5,6 +5,7 @@ import Header from "../Layout/Header";
 import ProductList from "../Product/ProductList";
 import Menu from "../Menu/Menu";
 import ShoppingCart from "../Cart/ShoppingCart";
+import { message } from "antd";
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] =
@@ -14,25 +15,31 @@ const Home = () => {
 
     // ➕ Add to cart (từ ProductCard)
     const handleAddToCart = (item: CartItemDTO) => {
-        setCartItems(prev => {
-            const existed = prev.find(
-                p => p.id === item.id && p.sizeId === item.sizeId
-            );
+        const existed = cartItems.find(
+            p => p.id === item.id && p.sizeId === item.sizeId
+        );
 
+        // 🛑 Đã tồn tại & vượt max
+        if (existed && existed.quantity + item.quantity > existed.maxQuantity) {
+            message.warning("Sản phẩm đã hết");
+            return;
+        }
+
+        // 🛑 Thêm mới nhưng vượt max
+        if (!existed && item.quantity > item.maxQuantity) {
+            message.warning(`Chỉ còn tối đa ${item.maxQuantity} sản phẩm`);
+            return;
+        }
+
+        // ✅ OK → mới setState
+        setCartItems(prev => {
             if (existed) {
                 return prev.map(p =>
-                    p.id === existed.id
-                        ? {
-                            ...p,
-                            quantity: Math.min(
-                                p.quantity + item.quantity,
-                                p.maxQuantity
-                            )
-                        }
+                    p.id === existed.id && p.sizeId === existed.sizeId
+                        ? { ...p, quantity: p.quantity + item.quantity }
                         : p
                 );
             }
-
             return [...prev, item];
         });
     };
