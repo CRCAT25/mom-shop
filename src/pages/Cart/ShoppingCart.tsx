@@ -53,7 +53,7 @@ const ShoppingCart = ({
                                 <div className="flex-1 flex flex-col">
                                     <div className="flex justify-between items-center">
                                         <h3 className="text-[16px] font-bold text-gray-800">
-                                            {item.name}
+                                            {item.name} ({item.sizeName})
                                         </h3>
                                         <button
                                             onClick={() => onRemoveItem(item.id)}

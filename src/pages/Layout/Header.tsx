@@ -5,7 +5,7 @@ const Header = () => {
                 {/* Logo */}
                 <div className="flex items-center">
                     <h1
-                        className="text-5xl italic text-gray-800 text-shadow-soft"
+                        className="text-5xl italic text-gray-800 text-shadow-soft font-bold"
                         style={{ fontFamily: 'Playball, cursive' }}
                     >
                         Cô Thoa Quán
@@ -15,7 +15,7 @@ const Header = () => {
                 {/* Contact & Auth */}
                 <div className="flex items-center gap-6">
                     <div className="text-right">
-                        <p className="text-red-600 text-sm font-semibold">Liên hệ trực tiếp</p>
+                        <p className="text-(--color-red-primary) text-sm font-semibold">Liên hệ trực tiếp</p>
                         <p className="text-gray-800 font-bold text-lg">0935.551.538</p>
                     </div>
 

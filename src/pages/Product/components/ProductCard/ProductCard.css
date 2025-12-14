@@ -10,9 +10,6 @@
 
 .add-to-cart-button {
     background: linear-gradient(to right,
-            #f59e0b,
-            /* amber-500 */
-            #ffb432
-            /* custom color */
-        ) !important;
+            var(--color-amber-gradient-from),
+            var(--color-amber-gradient-to)) !important;
 }

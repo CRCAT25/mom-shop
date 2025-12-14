@@ -5,6 +5,7 @@ export interface CartItemDTO {
     quantity: number;
     maxQuantity: number;
     sizeId: number;
+    sizeName: string;
     price: number;
     totalPrice: number;
     imageUrl: string;

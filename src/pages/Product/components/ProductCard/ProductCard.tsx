@@ -46,6 +46,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             id: `${product.id}-${selectedSize.id}`,
             name: product.name,
             sizeId: selectedSize.id,
+            sizeName: selectedSize.name,
             quantity,
             maxQuantity: selectedSize.quantity,
             price: selectedSize.price,

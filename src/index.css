@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+:root {
+    --color-red-primary: #9E0E11;
+    --color-amber-gradient-from: #f59e0b;
+    --color-amber-gradient-to: #ffb432;
+}
+
 html {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -13,9 +19,6 @@ html {
 
 .button-background-gradient {
     background: linear-gradient(to right,
-            #f59e0b,
-            /* amber-500 */
-            #ffb432
-            /* custom color */
-        );
+            var(--color-amber-gradient-from),
+            var(--color-amber-gradient-to));
 }
