@@ -1,32 +1,31 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { ProductCategoryDTO } from "../../types/ProductCategoryDTO";
-import { productMockList, type CartItemDTO } from "../../types/ProductDTO";
+import { productMockList } from "../../types/ProductDTO";
 import ProductCard from "./components/ProductCard/ProductCard";
 import { Search } from "lucide-react";
+import type { CartItemDTO } from "../../types/CartItemDTO";
 
 interface ProductListProps {
     category?: ProductCategoryDTO | null;
+    onAddToCart: (item: CartItemDTO) => void;
 }
 
-const ProductList = ({ category }: ProductListProps) => {
+const ProductList = ({ category, onAddToCart }: ProductListProps) => {
     const [keyword, setKeyword] = useState("");
 
-    const handleAddToCart = (item: CartItemDTO) => {
-        console.log(item);
-    };
-
-    useEffect(() => {
-        if (category) {
-            console.log("Selected category:", category);
-        }
-    }, [category]);
-
-    // 🔥 Filter product
     const filteredProducts = useMemo(() => {
-        return productMockList.filter(product =>
-            product.name.toLowerCase().includes(keyword.toLowerCase())
-        );
-    }, [keyword]);
+        return productMockList.filter(product => {
+            const matchKeyword = product.name
+                .toLowerCase()
+                .includes(keyword.toLowerCase());
+
+            const matchCategory =
+                !category || category.id === 0 || product.categoryId === category.id;
+
+            return matchKeyword && matchCategory;
+        });
+    }, [keyword, category]);
+
 
     return (
         <div className="product-list-container max-w-[720px] flex flex-col gap-4 w-full">
@@ -54,7 +53,7 @@ const ProductList = ({ category }: ProductListProps) => {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        onAddToCart={handleAddToCart}
+                        onAddToCart={onAddToCart}
                     />
                 ))
             ) : (

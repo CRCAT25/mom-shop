@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { Badge, Button, InputNumber, Rate } from 'antd';
 import './ProductCard.css';
 import SizeSelector from '../SizeSelector';
-import type { CartItemDTO, ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
+import type { ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
 import { formatCurrency } from '../../../../utils/formatCurrency';
 import ProductImageSlider from '../ProductImageSlider/ProductImageSlider';
 import { defaultImage } from '../../../../constants/DefaultData';
+import type { CartItemDTO } from '../../../../types/CartItemDTO';
 
 interface ProductCardProps {
     product: ProductDTO;
@@ -34,15 +35,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
     const handleSizeChange = (size: ProductSizeDTO) => {
         setSelectedSize(size);
+        setQuantity(1);
     };
 
     const handleAddToCart = () => {
         if (!onAddToCart) return;
+        if (selectedSize.quantity === 0) return;
 
         const item: CartItemDTO = {
-            id: product.id,
+            id: `${product.id}-${selectedSize.id}`,
+            name: product.name,
             sizeId: selectedSize.id,
             quantity,
+            maxQuantity: selectedSize.quantity,
             price: selectedSize.price,
             totalPrice: quantity * selectedSize.price,
             imageUrl: product.images.length > 0 ? product.images[0] : defaultImage
@@ -50,6 +55,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
 
         onAddToCart(item);
     };
+
+    useEffect(() => {
+        if (quantity > selectedSize.quantity) {
+            setQuantity(selectedSize.quantity || 1);
+        }
+    }, [selectedSize]);
     //#endregion
 
     //#region TAG PROPS
@@ -158,6 +169,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
                                             icon={<ShoppingCartIcon />}
                                             size="small"
                                             onClick={handleAddToCart}
+                                            disabled={product.status !== 1 || selectedSize.quantity === 0}
                                         >
                                             Thêm vào giỏ hàng
                                         </Button>

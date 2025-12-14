@@ -10,6 +10,7 @@ export interface ProductSizeDTO {
 export interface ProductDTO {
     id: number;
     name: string;
+    categoryId: number;
     rating: number;
     totalReviews: number;
     images: string[];
@@ -17,19 +18,11 @@ export interface ProductDTO {
     status: ProductStatusEnum;
 }
 
-export interface CartItemDTO {
-    id: number;
-    quantity: number;
-    sizeId: number;
-    price: number;
-    totalPrice: number;
-    imageUrl: string;
-}
-
 export const productMockList: ProductDTO[] = [
     {
         id: 1,
         name: 'Bánh Chưng Mặn',
+        categoryId: 1,
         rating: 4,
         totalReviews: 999,
         images: [
@@ -47,6 +40,7 @@ export const productMockList: ProductDTO[] = [
     {
         id: 2,
         name: 'Bánh Tét Chuối',
+        categoryId: 2,
         rating: 4.5,
         totalReviews: 542,
         images: [
@@ -60,6 +54,7 @@ export const productMockList: ProductDTO[] = [
     {
         id: 3,
         name: 'Bánh Chưng Chay',
+        categoryId: 1,
         rating: 3.8,
         totalReviews: 120,
         images: [], // 👉 test defaultImage
@@ -72,6 +67,7 @@ export const productMockList: ProductDTO[] = [
     {
         id: 4,
         name: 'Bánh Tét Đậu Xanh',
+        categoryId: 1,
         rating: 4.9,
         totalReviews: 1820,
         images: [
@@ -87,6 +83,7 @@ export const productMockList: ProductDTO[] = [
     {
         id: 5,
         name: 'Bánh Chưng Gấc',
+        categoryId: 3,
         rating: 4.2,
         totalReviews: 310,
         images: [
