@@ -143,7 +143,7 @@ const ShoppingCart = () => {
             </div>
 
             {/* Order Button */}
-            <button className="cursor-pointer w-full py-2 button-background-gradient text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 uppercase tracking-wide">
+            <button className="cursor-pointer w-full py-2 button-background-gradient text-white font-bold text-[14px] rounded-full shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 uppercase tracking-wide">
                 ĐẶT HÀNG
             </button>
         </div>
