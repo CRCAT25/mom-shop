@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { ProductCategoryDTO } from "../../types/ProductCategoryDTO";
-import { productMockList, type ProductAddToCartDTO } from "../../types/ProductDTO"
+import { productMockList, type CartItemDTO } from "../../types/ProductDTO"
 import ProductCard from "./components/ProductCard/ProductCard"
 
 interface ProductListProps {
@@ -8,7 +8,7 @@ interface ProductListProps {
 }
 
 const ProductList = ({ category }: ProductListProps) => {
-    const handleAddToCart = (item: ProductAddToCartDTO) => {
+    const handleAddToCart = (item: CartItemDTO) => {
         console.log(item)
     }
 

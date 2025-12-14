@@ -17,7 +17,7 @@ export interface ProductDTO {
     status: ProductStatusEnum;
 }
 
-export interface ProductAddToCartDTO {
+export interface CartItemDTO {
     id: number;
     quantity: number;
     sizeId: number;
@@ -33,8 +33,8 @@ export const productMockList: ProductDTO[] = [
         rating: 4,
         totalReviews: 999,
         images: [
-            'https://i.ibb.co/tMtq7YcQ/product1.jpg',
             'https://i.ibb.co/ccvmk2gW/product2.jpg',
+            'https://i.ibb.co/tMtq7YcQ/product1.jpg',
             'https://i.ibb.co/wrZqB8md/product4.jpg'
         ],
         sizes: [

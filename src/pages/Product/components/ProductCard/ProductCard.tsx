@@ -1,16 +1,16 @@
 import { ShoppingCartIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Badge, Button, InputNumber, Rate } from 'antd';
-import './productCard.css';
+import './ProductCard.css';
 import SizeSelector from '../SizeSelector';
-import type { ProductAddToCartDTO, ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
+import type { CartItemDTO, ProductDTO, ProductSizeDTO } from '../../../../types/ProductDTO';
 import { formatCurrency } from '../../../../utils/formatCurrency';
 import ProductImageSlider from '../ProductImageSlider/ProductImageSlider';
 import { defaultImage } from '../../../../constants/DefaultData';
 
 interface ProductCardProps {
     product: ProductDTO;
-    onAddToCart?: (item: ProductAddToCartDTO) => void;
+    onAddToCart?: (item: CartItemDTO) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
@@ -39,7 +39,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     const handleAddToCart = () => {
         if (!onAddToCart) return;
 
-        const item: ProductAddToCartDTO = {
+        const item: CartItemDTO = {
             id: product.id,
             sizeId: selectedSize.id,
             quantity,
@@ -73,7 +73,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         style: {
             width: `calc(100% - ${quantityInputProps.style.width}px)`,
             height: 40,
-            backgroundColor: '#FFB432',
             fontWeight: 600
         },
         className: 'add-to-cart-button',

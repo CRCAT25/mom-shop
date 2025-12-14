@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-import Cart from './pages/Cart/Cart';
+import './index.css';
 import Menu from './pages/Menu/Menu';
 import ProductList from './pages/Product/ProductList';
 import type { ProductCategoryDTO } from './types/ProductCategoryDTO';
 import Header from './pages/Layout/Header';
+import ShoppingCart from './pages/Cart/ShoppingCart';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState<ProductCategoryDTO | null>(null);
@@ -22,7 +23,9 @@ function App() {
           <Menu onSelect={setSelectedCategory} />
         </div>
         <ProductList category={selectedCategory} />
-        <Cart />
+        <div className='w-full max-w-[320px] sticky min-w-[200px] top-24'>
+          <ShoppingCart />
+        </div>
       </div>
     </div>
   )

@@ -7,3 +7,12 @@
 .add-to-cart-button .ant-btn-icon {
     display: flex;
 }
+
+.add-to-cart-button {
+    background: linear-gradient(to right,
+            #f59e0b,
+            /* amber-500 */
+            #ffb432
+            /* custom color */
+        ) !important;
+}

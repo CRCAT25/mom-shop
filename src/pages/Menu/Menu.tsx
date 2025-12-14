@@ -45,7 +45,7 @@ const Menu = ({ onSelect }: MenuProps) => {
                                 rounded-xl transition-all duration-300 ease-out
                                 flex items-center justify-between group w-full
                                 ${isActive
-                                    ? 'bg-linear-to-r from-amber-500 to-[#ffb432] text-white shadow-lg -translate-y-0.5'
+                                    ? 'button-background-gradient text-white shadow-lg -translate-y-0.5'
                                     : 'text-gray-700 hover:bg-orange-50 hover:text-orange-600 hover:translate-x-1'}
                             `}
                         >

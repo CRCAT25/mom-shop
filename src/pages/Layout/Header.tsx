@@ -4,7 +4,10 @@ const Header = () => {
             <div className="max-w-8xl mx-auto px-10 py-4 flex items-center justify-between">
                 {/* Logo */}
                 <div className="flex items-center">
-                    <h1 className="text-5xl italic text-gray-800" style={{ fontFamily: 'Playball, cursive' }}>
+                    <h1
+                        className="text-5xl italic text-gray-800 text-shadow-soft"
+                        style={{ fontFamily: 'Playball, cursive' }}
+                    >
                         Cô Thoa Quán
                     </h1>
                 </div>
@@ -20,7 +23,7 @@ const Header = () => {
                         <button className="cursor-pointer px-6 py-2 border-2 border-[#ffb432] text-[#ffb432] font-semibold rounded-full hover:bg-orange-50 transition-all duration-300">
                             Đăng ký
                         </button>
-                        <button className="cursor-pointer px-6 py-2 bg-linear-to-r from-amber-500 to-[#ffb432] text-white font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
+                        <button className="cursor-pointer px-6 py-2 button-background-gradient text-white font-semibold rounded-full hover:shadow-lg hover:scale-105 transition-all duration-300">
                             Đăng nhập
                         </button>
                     </div>
