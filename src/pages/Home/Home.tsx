@@ -100,7 +100,7 @@ const Home = () => {
                     </div>
 
                     {/* PRODUCT LIST */}
-                    <div className="flex-3">
+                    <div className="flex-3 w-full">
                         <ProductList
                             category={selectedCategory}
                             onAddToCart={handleAddToCart}
@@ -108,7 +108,7 @@ const Home = () => {
                     </div>
 
                     {/* SHOPPING CART */}
-                    <div className="flex-[2 w-full max-w-[340px] sticky min-w-[200px] top-24">
+                    <div className="flex-2 w-full max-w-[340px] sticky min-w-[200px] top-24">
                         <ShoppingCart
                             cartItems={cartItems}
                             onUpdateQuantity={handleUpdateQuantity}

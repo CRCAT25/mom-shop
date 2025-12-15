@@ -28,7 +28,7 @@ const ProductList = ({ category, onAddToCart }: ProductListProps) => {
 
 
     return (
-        <div className="product-list-container max-w-[720px] flex flex-col gap-4 w-full">
+        <div className="product-list-container min-w-[620px] flex flex-col gap-4 w-full">
 
             {/* 🔍 SEARCH BAR */}
             <div className="relative">

@@ -20,5 +20,5 @@ html {
 .button-background-gradient {
     background: linear-gradient(to right,
             var(--color-amber-gradient-from),
-            var(--color-amber-gradient-to));
+            var(--color-amber-gradient-to)) !important;
 }
