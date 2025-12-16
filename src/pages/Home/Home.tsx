@@ -6,6 +6,7 @@ import ProductList from "../Product/ProductList";
 import Menu from "../Menu/Menu";
 import ShoppingCart from "../Cart/ShoppingCart";
 import { message } from "antd";
+import './Home.css';
 
 const Home = () => {
     //#region STATES
@@ -93,14 +94,14 @@ const Home = () => {
             {/* CONTENT */}
             <div className="py-4 px-10 max-w-8xl">
                 <div className="text-center text-3xl py-5 text-(--color-red-primary) uppercase font-bold">Thực đơn hôm nay</div>
-                <div className="flex gap-16 justify-between items-start w-full">
+                <div className="flex gap-16 justify-center items-start w-full">
                     {/* MENU */}
-                    <div className="flex-1 w-full max-w-[320px] sticky min-w-[200px] top-24">
+                    <div className="sticky w-full top-24 flex justify-end menu-container flex-2">
                         <Menu onSelect={setSelectedCategory} />
                     </div>
 
                     {/* PRODUCT LIST */}
-                    <div className="flex-3 w-full">
+                    <div className="w-full flex justify-center product-list-container flex-5">
                         <ProductList
                             category={selectedCategory}
                             onAddToCart={handleAddToCart}
@@ -108,7 +109,7 @@ const Home = () => {
                     </div>
 
                     {/* SHOPPING CART */}
-                    <div className="flex-2 w-full max-w-[340px] sticky min-w-[200px] top-24">
+                    <div className="sticky w-full top-24 shopping-cart-container flex-3">
                         <ShoppingCart
                             cartItems={cartItems}
                             onUpdateQuantity={handleUpdateQuantity}

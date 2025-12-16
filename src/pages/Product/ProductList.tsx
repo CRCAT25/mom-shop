@@ -4,6 +4,8 @@ import { productMockList } from "../../types/ProductDTO";
 import ProductCard from "./components/ProductCard/ProductCard";
 import { Search } from "lucide-react";
 import type { CartItemDTO } from "../../types/CartItemDTO";
+import { Input } from "antd";
+import { SearchOutlined } from '@ant-design/icons';
 
 interface ProductListProps {
     category?: ProductCategoryDTO | null;
@@ -26,25 +28,22 @@ const ProductList = ({ category, onAddToCart }: ProductListProps) => {
         });
     }, [keyword, category]);
 
+    const inputSearchProps = {
+        style: {
+            borderRadius: '100px',
+            minWidth: 700
+        },
+        placeholder: 'Tìm món ăn...',
+        value: keyword,
+        onChange: (e: any) => setKeyword(e.target.value),
+    }
 
     return (
-        <div className="product-list-container min-w-[620px] flex flex-col gap-4 w-full">
+        <div className="w-full max-w-[820px] flex flex-col gap-4 items-center">
 
             {/* 🔍 SEARCH BAR */}
-            <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                    type="text"
-                    value={keyword}
-                    onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="Tìm món ăn..."
-                    className="
-                        w-full pl-12 pr-4 py-3 rounded-full
-                        border border-gray-300
-                        focus:outline-none focus:ring-2 focus:ring-amber-400
-                        transition-all
-                    "
-                />
+            <div className="relative w-full">
+                <Input {...inputSearchProps} size="large" prefix={<SearchOutlined />} />
             </div>
 
             {/* 🧾 PRODUCT LIST */}

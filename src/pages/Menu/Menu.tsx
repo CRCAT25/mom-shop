@@ -31,7 +31,7 @@ const Menu = ({ onSelect }: MenuProps) => {
     }, []);
 
     return (
-        <div className="menu-container flex flex-col max-w-[320px] w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-[#EEEEEE]">
+        <div className="flex flex-col max-w-[320px] min-w-[200px] w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-(--color-gray-primary)">
             <div className="p-2 pb-0!">
                 {productCategories.map((category) => {
                     const isActive = activeId === category.id;

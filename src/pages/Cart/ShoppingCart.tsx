@@ -22,13 +22,13 @@ const ShoppingCart = ({
         price.toLocaleString('vi-VN') + 'đ';
 
     return (
-        <div className="w-full bg-white rounded-2xl shadow-xl p-5 border border-[#EEEEEE]">
+        <div className="w-full min-w-[300px] bg-white rounded-2xl shadow-xl p-5 border border-(--color-gray-primary)">
             {/* Header */}
             <h2 className="text-[20px] font-bold text-center py-4 pt-0 text-gray-800">
                 Giỏ hàng của bạn
             </h2>
 
-            <div className="border-b border-[#EEEEEE] mb-6" />
+            <div className="border-b border-(--color-gray-primary) mb-6" />
 
             {/* Cart Items */}
             {cartItems.length === 0 ? (

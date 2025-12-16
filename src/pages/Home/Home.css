@@ -1,0 +1,23 @@
+@media screen and (max-width: 1440px) {
+    .shopping-cart-container {
+        display: none;
+    }
+
+    .menu-container {
+        width: auto;
+        /* min-width: 240px;
+        width: 300px; */
+    }
+
+    .product-list-container {
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 1080px) {
+    .menu-container {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 780px) {}

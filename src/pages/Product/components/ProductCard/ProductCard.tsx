@@ -104,7 +104,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
     //#endregion
 
     return (
-        <div className="product-card-container max-w-[720px] w-full mx-auto h-auto bg-white border border-[#EEEEEE] rounded-xl shadow-lg">
+        <div className="product-card-container max-w-[820px] w-full min-w-[700px] mx-auto h-auto bg-white border border-(--color-gray-primary) rounded-xl shadow-lg">
             <Badge.Ribbon {...productStatusProps}>
                 <div className='p-5'>
                     <div className="flex gap-5 w-full">
